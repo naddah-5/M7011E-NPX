@@ -13,6 +13,6 @@ class House {
         this.temperature = temperature;
         this.windSpeed = windSpeed;
         this.consumption = consumption; // roughly 100 kWh
-        this.greed = greed;
+        this.greed = greed; 
     }
 }
