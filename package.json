@@ -1,0 +1,24 @@
+{
+  "name": "m7011e-npx",
+  "version": "1.0.0",
+  "description": "Project in M7011E.",
+  "main": "init.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node init.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naddah-5/M7011E-NPX.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/naddah-5/M7011E-NPX/issues"
+  },
+  "homepage": "https://github.com/naddah-5/M7011E-NPX#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
