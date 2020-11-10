@@ -7,9 +7,10 @@
 // setInterval(theMainFunction, time interval in ms);
 
 
-import express from 'express';
-const app = express();
-const port = 3000;
+let express = require('express');
+//import Express from express;
+let app = express();
+let port = 3000;
 
 app.get("/", (req, res) => {
     res.send("Welcome to the homepage.");
