@@ -12,4 +12,53 @@ module.exports = class windturbine{
         this.minWindSpeed = 0;
         this.maxWindSpeed = 60;
     }
+    getOwner(){
+        return this.owner;
+    }
+    setOwner(owner){
+        this.owner = owner;
+    }
+    getEfficency(){
+        return this.efficency;
+    }
+    setEfficency(efficency){
+        this.efficency = efficency;
+    }
+    getWindSpeed(){
+        return this.windSpeed;
+    }
+    setWindSpeed(windSpeed){
+        this.windSpeed = windSpeed;
+    }
+    getStatus(){
+        return this.status;
+    }
+    setStatus(status){
+        this.status = status;
+    }
+    getMinProduction(){
+        return this.maxProduktion;
+    }
+    setMinProduction(minProduction){
+        this.minProduction =  minProduction;
+    }
+    getMaxProduction(){
+        return this.maxProduktion;
+    }
+    setMaxProduction(maxProduction){
+        this.maxProduktion = maxProduction;
+    }
+    getMinWindSpeed(){
+        return this.minWindSpeed;
+    }
+    setMinWindSpeed(minWindSpeed){
+        this.minWindSpeed = minWindSpeed;
+    }
+    getMaxWindSpeed(){
+        return this.maxWindSpeed;
+    }
+    setMaxWindSpeed(maxWindSpeed){
+        this.maxWindSpeed = maxWindSpeed;
+    }
+    
 }
