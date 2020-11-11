@@ -5,19 +5,20 @@
 
 // This is the control node, set the repeat interval here.
 // setInterval(theMainFunction, time interval in ms);
-
-
-let express = require('express');
+import dotenv from 'dotenv';
+import express from 'express';
 //import express from 'express';
+//
+// init config
+dotenv.config();
 let app = express();
-let port = 3000;
 
 app.get("/", (req, res) => {
     res.send("Welcome to the homepage.");
 })
 
 app.get("/house", (req, res) => {
-    req()
+    res.send("house");
 })
 
-app.listen(port, () => console.log("Listening on port " + port));
+app.listen(process.env.SERVER_PORT, () => console.log("Listening on port " + process.env.SERVER_PORT));
