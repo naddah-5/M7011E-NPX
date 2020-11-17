@@ -3,10 +3,17 @@
   "version": "1.0.0",
   "description": "Project in M7011E.",
   "main": "init.js",
-  "type": "module",
   "scripts": {
+    "src": "nodemon ./src/index.js", 
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js"
+    "start": "node ./dist-src/index.js",
+    "transpile": "babel ./src --out-dir dist-src",
+    "clean": "rimraf dist-server",
+    "build": "npm-run-all clean transpile",
+    "dev": "NODE_ENV=development npm-run-all build start"
+  },
+  "babel": {
+    "presets": ["@babel/preset-env"]
   },
   "repository": {
     "type": "git",
@@ -19,8 +26,12 @@
   },
   "homepage": "https://github.com/naddah-5/M7011E-NPX#readme",
   "dependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "rimraf": "^3.0.2"
   }
 }
