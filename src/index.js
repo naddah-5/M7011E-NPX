@@ -5,7 +5,8 @@
 
 // This is the control node, set the repeat interval here.
 // setInterval(theMainFunction, time interval in ms);
-import dotenv from 'dotenv';
+//import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 
 //toggle between these two as needed, seems like it's different depending on the ES6 version.
 const express = require('express');
