@@ -8,24 +8,25 @@
 import dotenv from 'dotenv';
 
 //toggle between these two as needed, seems like it's different depending on the ES6 version.
-let express = require('express');
+const express = require('express');
 //import express from 'express';
 
-let url = require('url');
+const url = require('url');
+const houses = require("./api/routes/houses");
 
 //
 // init config
 dotenv.config();
-let app = express();
+const app = express();
+
+app.use(express.json());
+// we use houses.js to handle all endpoints 
+//that start with /houses
+app.use("/houses", houses);
 
 app.get("/", (req, res) => {
     res.send("Welcome to the homepage.");
 })
-
-app.get("/houses", (req, res) => {
-    res.send("houses");
-})
-
 
 app.listen(process.env.SERVER_PORT, () => console.log("Listening on port " + process.env.SERVER_PORT));
 
