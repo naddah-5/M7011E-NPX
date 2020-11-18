@@ -6,11 +6,21 @@
 
 const express = require('express');
 const router = require('./api/router')
+var mongoose = require("mongoose");
 require('dotenv').config();
 
 // init config
 const port = process.env.SERVER_PORT || 3030; 
 const app = express();
+
+mongoose.connect(process.env.MONGO_URI, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true
+});
+
+mongoose.connection.once("open", function() {
+  console.log("mongo online")
+});
 
 app.use(express.json());
 
