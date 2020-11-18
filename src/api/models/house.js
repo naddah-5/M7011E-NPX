@@ -1,8 +1,14 @@
-const { Schema } = require("mongoose");
-let { Point } = require("./point")
+//modules
+const mongoose = require("mongoose");
+const timestamps = require("mongoose-timestamp");
+const mongooseStringQuery = require("mongoose-string-query");
+const { Schema } = mongoose;
+
+//import schema
+let Point = require("./point").schema;
 
 const houseSchema = new Schema({
-    id: {type: String, require: true},
+    id: Schema.ObjectId,
     battery: Number,
     windturbine: Number,
     marketPrice: Number,
@@ -15,4 +21,7 @@ const houseSchema = new Schema({
     greed: Number
 });
 
-module.exports = mongoose.model("house", houseSchema)
+houseSchema.plugin(timestamps);
+houseSchema.plugin(mongooseStringQuery);
+
+module.exports = mongoose.model("House", houseSchema)

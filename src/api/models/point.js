@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const pointSchema = new Schema({
     location: { //GeoJSON
@@ -12,4 +12,4 @@ const pointSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model("Point", pointSchema);
+module.exports = model("Point", pointSchema);
