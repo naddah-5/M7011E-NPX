@@ -14,7 +14,6 @@ const houseSchema = new Schema({
     marketPrice: Number,
     location: { //GeoJSON
         type: Point,
-        require: true
     },
     windSpeed: Number,
     consumption: {type: Number, require: true},

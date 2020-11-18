@@ -11,7 +11,12 @@ const port = process.env.SERVER_PORT || 3030;
 const uri = process.env.MONGO_URI;
 const app = express();
 
-mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true })
+mongoose.connect(uri, { 
+  "auth": { "authSource": "admin" },
+  "user": process.env.MONGO_ADMIN_USER,
+  "pass": process.env.MONGO_ADMIN_SECRET,
+  useUnifiedTopology: true,
+  useNewUrlParser: true })
   .then( () => console.log('connection success'))
   .catch( (err) => console.error(err));
 
