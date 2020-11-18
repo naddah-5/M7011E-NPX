@@ -1,12 +1,14 @@
 let express = require('express');
-let router = express.Router();
-
+//import express from 'express';
+var router = express.Router();
+const houses = require("./routes/houses")
 router.get('/', (req, res) => {
-    res.send('Welcome to the homepage!')
+    res.send('Welcome to the Routes!')
 })
-
 router.get('/houses', (req, res) => {
     res.send('These are the available houses.');
 })
+router.use('/house', houses);
 
-module.exports  = router;
+//export default router;
+module.exports = router;

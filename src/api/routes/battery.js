@@ -8,9 +8,11 @@ router
     .get( (req, res) => {
         //if id field empty, get all collections else, get specific endpoint
         // TODO Implement Mongoose collections
-      req.params.id === undefined ? res.send("houses") : res.send(req.params.id)
+      req.params.id === undefined ? res.send("windmills") : res.send(req.params.id)
     })
     .post((req, res) => {
     });
 
 module.exports = router;
+
+
