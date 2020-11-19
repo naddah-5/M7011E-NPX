@@ -1,21 +1,18 @@
 //modules
-const mongoose = require("mongoose");
+const { Schema, model, ObjectID }  = require("mongoose");
 const timestamps = require("mongoose-timestamp");
 const mongooseStringQuery = require("mongoose-string-query");
-const { Schema } = mongoose;
 
 //import schema
-let Point = require("./point").schema;
 
-const houseSchema = new Schema({
-    id: Schema.ObjectId,
+var houseSchema = new Schema({
     battery: Number,
     windturbine: Number,
     marketPrice: Number,
     location: { //GeoJSON
-        type: Point,
-        require: true
-    },
+			type: [Number],
+			validate: v => Array.isArray(v) && v.length == 2
+		},
     windSpeed: Number,
     consumption: {type: Number, require: true},
     greed: Number
@@ -24,4 +21,4 @@ const houseSchema = new Schema({
 houseSchema.plugin(timestamps);
 houseSchema.plugin(mongooseStringQuery);
 
-module.exports = mongoose.model("House", houseSchema)
+module.exports = model("House", houseSchema)

@@ -7,6 +7,7 @@ var House = require("../models/house");
 //SCHEMA
 
 //ROUTES
+				//GET
 router
     .route("/:id?")
     .get( (req, res, next) => {
@@ -18,18 +19,34 @@ router
                     res.json(result);
                 }
             })
-        } else {                            //house doesnt exist
+        } else {                            
             House.findById(req.params.id, (err, result) => {
-                if (err) return next(err);
+                if (err) {
+										res.json(err);
+								} else {
                 res.json(result);
+								}
             })
         }
-    })
-    .post( (req, res, next) => {
-        House.create(req.body, (err, post) => {
+    });
+					//POST
+/*
+router.post("/", (req, res, next) => {
+          House.create(req.body, (err, post) => {
             if (err) return next(err);
             res.json(post);
+          });
         });
-    });
+*/
+router.post("/:id", (req, res) => {
+          console.log(req.params.id);
+          House.findOneAndUpdate( req.params.id, (err, result) => {
+            if (err) {
+              res.json(err);
+            } else {
+              res.json(result);
+            }
+        });
+      });
 
 module.exports = router;
