@@ -1,12 +1,19 @@
 "use strict";
 
 module.exports = class battery {
-    constructor(owner, capacity){
+    constructor(id, owner, capacity){
+        this.id = id;
         this.owner = owner;
         this.minCapacity = 0;
         this.capacity = capacity;
-        this.charge = Math.floor(capacity/2);
+        this.charge = 0;
         this.chargeRate = 200; //roughly 200 kWh
+    }
+    getId(){
+        return this.id;
+    }
+    setId( id ){
+        this.id = id;
     }
     getOwner(){
         return this.owner;

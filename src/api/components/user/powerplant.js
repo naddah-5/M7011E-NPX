@@ -1,7 +1,8 @@
 "use strict";
 
 module.exports = class powerplant {
-    constructor(owner, maxProduction, innertia, consumption){
+    constructor(id, owner, maxProduction, innertia, consumption){
+        this.id =  id;
         this.owner = owner;
         this.minProduction = 0;
         this.maxProduction = maxProduction;
@@ -9,7 +10,13 @@ module.exports = class powerplant {
         this.innertia = innertia;
         this.consumption = consumption;
     }
-
+    
+    getId(){
+        return this.id;
+    }
+    setId( id ){
+        this.id = id;
+    }
     getOwner(){
         return this.owner;
     }

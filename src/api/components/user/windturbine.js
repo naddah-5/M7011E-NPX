@@ -1,7 +1,8 @@
 "use strict";
 
 module.exports = class windturbine{
-    constructor(owner){
+    constructor(id, owner){
+        this.id = id;
         this.owner = owner;
         this.efficency = 1;
         this.windSpeed = 0;
@@ -11,6 +12,12 @@ module.exports = class windturbine{
         this.production = 0;
         this.minWindSpeed = 0;
         this.maxWindSpeed = 60;
+    }
+    getId(){
+        return this.id;
+    }
+    setId( id ){
+        this.id = id;
     }
     getOwner(){
         return this.owner;

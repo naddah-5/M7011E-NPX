@@ -4,9 +4,10 @@ let Battery = require("./battery");
 let WindTurbine = require("./windturbine");
 
 class House {
-    constructor(id, capacity, marketPrice, location, temperature, windSpeed, consumption, greed){
+    constructor(id, owner, capacity, marketPrice, location, temperature, windSpeed, consumption, greed){
         this.id = id;
-        this.Battery = new Battery(id, capacity);
+		this.owner = owner;
+		this.Battery = new Battery(id, capacity);
         this.WindTurbine = new WindTurbine(id);
         this.marketPrice = marketPrice;
         this.location = location;
@@ -14,9 +15,16 @@ class House {
         this.windSpeed = windSpeed;
         this.consumption = consumption; // roughly 100 kWh
         this.greed = greed; 
-    }
-		getOwner(){ return this.id; } 
-		setOwner(id){ this.id = id; } 
+	}
+		getId(){
+			return this.id;
+		}
+		setId( id ){
+			this.id = id;
+		}
+
+		getOwner(){ return this.owner; } 
+		setOwner(owner){ this.owner = owner; } 
 
 		getBattery(){ return this.Battery; } 
 		setBattery(capacity, id=this.id){ this.Battery.setCapacity(capacity); this.Battery.setOwner(id); } 
