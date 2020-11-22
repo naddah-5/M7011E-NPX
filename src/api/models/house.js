@@ -6,10 +6,6 @@ const mongooseStringQuery = require("mongoose-string-query");
 //import schema
 
 const houseSchema = new Schema({
-  id: {
-    type: Number,
-    required: true
-  },
   owner:{
     type: String,
     required: true

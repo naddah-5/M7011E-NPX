@@ -1,45 +1,47 @@
 const House = require("../models/house");
 
 // LOAD from ID
-module.load = function(req, res) {
-  
-}
-// GET Singular
-module.get = function(req, res, next) { 
-  House.findById(req.params.id, (err, result) => {
-    return res.json(result);
+module.exports.load = function(req, res, next, id) {
+  House.findById(id).exec().then((house) => {
+    req.dbHouse = house;
+    return next();
   }, (err) => next(err));
 }
 
+// GET Singular
+module.exports.get = function(req, res, next) { 
+    console.log("get"); 
+    return res.json(req.dbHouse);
+  }
+
 // GET Plural 
-module.list = function(req, res, next) {
+module.exports.list = function(req, res, next) {
   House.find({}, (err, result) => {
     return res.json(result);
   }, (err) => next(err));
 }
 
 // POST Create
-exports.create = function(req, res, next) {
-  House.create(req.body, (err, post) => {
-    return res.json(post);
-  }, (err) => next(err));
+module.exports.create = function(req, res, next) {
+  House.create(req.body, (err, result) => { 
+    if (err) return next(err);
+    return res.json(result);
+  });
 }
 
 // PUT Update
-module.update = function(req, res, next) {
-  House.findByIdAndUpdate(id, {
-    new: true,
-  }, (err, res) => { 
+module.exports.update = function(req, res, next) {
+  House.updateOne(req.dbHouse, req.body, (err, result) => { 
     if (err) return next(err);
-    return res.json(res);
+    return res.json(result);
   });
 }
 
 // DELETE 
-module.remove = function(req, res, next) {
-  House.findByIdAndDelete(id, (err, res) => { 
+module.exports.remove = function(req, res, next) {
+  House.deleteOne(req.dbHouse, (err, result) => { 
     if (err) return next(err);
-    return res.json(res);
+    return res.json(result);
   });
 }
 
