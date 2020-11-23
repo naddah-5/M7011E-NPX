@@ -1,7 +1,7 @@
 "use strict"; 
 const express = require("express");
 var router = express.Router();
-
+const powerplantController = require("../controllers/powerplant");
 // collection of houses
 router
     .route("/:id")
@@ -14,5 +14,3 @@ router
     });
 
 module.exports = router;
-
-

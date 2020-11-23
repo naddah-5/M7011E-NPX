@@ -3,7 +3,6 @@ const timestamps = require("mongoose-timestamp");
 const mongooseStringQuery = require("mongoose-string-query");
 
 const powerplantSchema = new Schema({
-    id: Schema.ObjectId,
     owner: {
         type: String,
         required: true
@@ -30,7 +29,7 @@ const powerplantSchema = new Schema({
     }
 });
 
-houseSchema.plugin(timestamps);
-houseSchema.plugin(mongooseStringQuery);
+powerplantSchema.plugin(timestamps);
+powerplantSchema.plugin(mongooseStringQuery);
 
-modules.export = model("Powerplant", powerplantSchema);
+module.exports = model("Powerplant", powerplantSchema);
