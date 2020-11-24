@@ -2,6 +2,8 @@
 const { Schema, model, ObjectID } = require("mongoose");
 const timestamps = require("mongoose-timestamp");
 const mongooseStringQuery = require("mongoose-string-query");
+const Battery = require("./battery").schema;
+const Windturbine = require("./windturbine").schema;
 
 //import schema
 
@@ -10,8 +12,8 @@ const houseSchema = new Schema({
     type: String,
     required: true,
   },
-  battery: Number,
-  windturbine: Number,
+  battery: Battery,
+  windturbine: Windturbine,
   marketPrice: Number,
   location: {
     //GeoJSON

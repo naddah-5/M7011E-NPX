@@ -1,14 +1,6 @@
 const { Schema, model } = require("mongoose");
 
 const batterySchema = new Schema({
-  id: {
-    type: Number,
-    required: true,
-  },
-  owner: {
-    type: String,
-    required: true,
-  },
   minCapacity: {
     type: Number,
     default: 0,
@@ -27,5 +19,5 @@ const batterySchema = new Schema({
   },
 });
 
-modules.export = model("Battery", batterySchema);
+module.exports = model("Battery", batterySchema);
 

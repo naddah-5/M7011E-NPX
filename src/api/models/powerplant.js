@@ -1,10 +1,15 @@
 const { Schema, model } = require("mongoose");
 const timestamps = require("mongoose-timestamp");
 const mongooseStringQuery = require("mongoose-string-query");
+const Battery = require("./battery").schema;
 
 const powerplantSchema = new Schema({
     owner: {
         type: String,
+        required: true
+    },
+    battery: {
+        type: Battery,
         required: true
     },
     minProduction: {
