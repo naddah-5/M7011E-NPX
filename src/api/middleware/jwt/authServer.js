@@ -25,6 +25,10 @@ router.get('/sanity', (req, res) => {
   res.send(posts);
 })
 
+router.get('/posts', authenticateToken, (req, res) =>{
+  res.json(posts.filter(posts => posts.username === req.username));
+})
+
 
 router.post("/", (req, res) => {
   // Authenticate user here!
@@ -35,6 +39,18 @@ router.post("/", (req, res) => {
   const accessToken = jwt.sign(user, process.env.JWT_ACCESS_TOKEN);
   res.json({ accessToken: accessToken  })
 })
+
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  if (token == null) return res.sendStatus(401);
+
+  jwt.verify(token, process.env.JWT_ACCESS_TOKEN, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
+}
 
 
 module.exports = router;
