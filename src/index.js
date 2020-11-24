@@ -11,6 +11,8 @@ const port = process.env.SERVER_PORT || 3030;
 const uri = process.env.MONGO_URI;
 const app = express();
 
+router.use(express.json());
+
 mongoose.connect(uri, { 
   "auth": { "authSource": "admin" },
   "user": process.env.MONGO_ADMIN,

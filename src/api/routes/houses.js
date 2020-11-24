@@ -6,6 +6,10 @@ const houseController = require("../controllers/house");
 var router = express.Router();
 //ROUTES
 
+router.get('/sanity', (req, res) => {
+    res.send('This is a sanity test.')
+})
+
 router.route("/")
   .get(houseController.list)
   .post(houseController.create); 
