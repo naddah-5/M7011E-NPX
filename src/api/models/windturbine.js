@@ -2,14 +2,6 @@ const { Schema, model } = require("mongoose");
 
 
 const windturbineSchema = new Schema({
-    id:{
-        type: Number,
-        required: true
-    },
-    owner:{
-        type: String,
-        required: true
-    },
     efficency:{
         type: Number,
         default: 1 
@@ -46,4 +38,4 @@ const windturbineSchema = new Schema({
 })
 
 
-modules.export = model("Windturbine", windturbineSchema);
+module.exports = model("Windturbine", windturbineSchema);

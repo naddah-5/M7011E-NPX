@@ -1,34 +1,33 @@
-const House = require("../models/house");
+const powerplant = require("../models/powerplant");
+const Powerplant = require("../models/powerplant");
 
 // LOAD from ID
 exports.load = function (req, res, next, id) {
-  console.log("load"); 
-  House.findById(id)
+  Powerplant.findById(id)
     .exec()
     .then(
-      (house) => {
-        req.dbHouse = house;
+      (powerplant) => {
+        req.dbPowerplant = powerplant;
         return next();
       },
       (err) => next(err)
     );
 };
-// GET by owner
+// GET ByOwner
 exports.getByOwner = function (req, res, next) {
-  House.find({ owner: req.params.owner} , (err, result) => {
+  powerplant.find({ owner: req.params.owner} , (err, result) => {
     if (err) return next(err);
     return res.json(result);
   });
 }
-
 // GET Singular
 exports.get = function (req, res, next) {
-  return res.json(req.dbHouse);
+  return res.json(req.dbPowerplant);
 };
 
 // GET Plural
 exports.list = function (req, res, next) {
-  House.find({}, (err, result) => {
+  Powerplant.find({}, (err, result) => {
     if (err) return next(err);
     return res.json(result);
   });
@@ -36,7 +35,7 @@ exports.list = function (req, res, next) {
 
 // POST Create
 exports.create = function (req, res, next) {
-  House.create(req.body, (err, result) => {
+  Powerplant.create(req.body, (err, result) => {
     if (err) return next(err);
     return res.json(result);
   });
@@ -44,7 +43,7 @@ exports.create = function (req, res, next) {
 
 // PUT Update
 exports.update = function (req, res, next) {
-  House.updateOne(req.dbHouse, req.body, (err, result) => {
+  Powerplant.updateOne(req.dbPowerplant, req.body, (err, result) => {
     if (err) return next(err);
     return res.json(result);
   });
@@ -52,7 +51,7 @@ exports.update = function (req, res, next) {
 
 // DELETE
 exports.remove = function (req, res, next) {
-  House.deleteOne(req.dbHouse, (err, result) => {
+  Powerplant.deleteOne(req.dbPowerplant, (err, result) => {
     if (err) return next(err);
     return res.json(result);
   });
@@ -60,7 +59,7 @@ exports.remove = function (req, res, next) {
 
 // DELETE All
 exports.removeAll = function (req, res, next) {
-  House.deleteMany({}, (err, result) => {
+  Powerplant.deleteMany({}, (err, result) => {
     if (err) return next(err);
     return res.json(result);
   });

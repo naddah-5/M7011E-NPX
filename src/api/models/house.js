@@ -1,41 +1,44 @@
 //modules
-const { Schema, model, ObjectID }  = require("mongoose");
+const { Schema, model, ObjectID } = require("mongoose");
 const timestamps = require("mongoose-timestamp");
 const mongooseStringQuery = require("mongoose-string-query");
+const Battery = require("./battery").schema;
+const Windturbine = require("./windturbine").schema;
 
 //import schema
 
 const houseSchema = new Schema({
-  owner:{
+  owner: {
     type: String,
-    required: true
+    required: true,
   },
-  battery: Number,
-  windturbine: Number,
+  battery: Battery,
+  windturbine: Windturbine,
   marketPrice: Number,
-  location: { //GeoJSON
-	  type: [Number],
-	  validate: v => Array.isArray(v) && v.length == 2
+  location: {
+    //GeoJSON
+    type: [Number],
+    validate: (v) => Array.isArray(v) && v.length == 2,
   },
   temperature: {
     type: Number,
-    default: 0
+    default: 0,
   },
   windSpeed: {
     type: Number,
-    default: 0
+    default: 0,
   },
   consumption: {
     type: Number,
-    default: 100
+    default: 100,
   },
   greed: {
     type: Number,
-    default: 1
-  }
+    default: 1,
+  },
 });
 
 houseSchema.plugin(timestamps);
 houseSchema.plugin(mongooseStringQuery);
 
-module.exports = model("House", houseSchema)
+module.exports = model("House", houseSchema);

@@ -1,16 +1,26 @@
 "use strict"; 
 const express = require("express");
+const powerplantCtrl = require("../controllers/powerplant");
 var router = express.Router();
 
 // collection of houses
 router
-    .route("/:id")
-    .get( (req, res) => {
-        //if id field empty, get all collections else, get specific endpoint
-        // TODO Implement Mongoose collections
-      req.params.id === undefined ? res.send("powerplant") : res.send(req.params.id)
-    })
-    .post((req, res) => {
-    });
+  .route("/")
+  .get(powerplantCtrl.list)
+  .post(powerplantCtrl.create)
+  .delete(powerplantCtrl.removeAll);
+
+// By ID
+router
+  .route("/:id")
+  .get(powerplantCtrl.get)
+  .put(powerplantCtrl.update)
+  .delete(powerplantCtrl.remove);
+
+router
+  .route("/owner/:owner")
+  .get(powerplantCtrl.getByOwner);
+
+router.param("id", powerplantCtrl.load);
 
 module.exports = router;
