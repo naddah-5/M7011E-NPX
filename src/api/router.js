@@ -9,7 +9,7 @@ router.use(express.json());
 
 router.use('/houses', houses);
 router.use('/jwtTokens', jwtTokens);
-router.use('/middleware/jwt/authServer', auth);
+router.use('/authServer', auth);
 
 
 // Sanity test, use this to verify that everything works up until this point.
