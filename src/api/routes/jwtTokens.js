@@ -21,8 +21,7 @@ const posts = [
 ]
 // Sanity test, use this to verify that everything works up until this point.
 router.get('/sanity', (req, res) => {
-  let posts = 'This is a sanity test.'
-  res.send(posts);
+  res.send('This is a sanity test.')
 })
 
 router.get('/posts', (req, res) => {

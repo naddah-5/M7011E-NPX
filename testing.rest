@@ -6,7 +6,7 @@ GET http://localhost:3000/sanity
 
 ###
 
-POST http://localhost:3000/jwtTokens
+POST http://localhost:3000/authServer
 Content-Type: application/json
 
 {
