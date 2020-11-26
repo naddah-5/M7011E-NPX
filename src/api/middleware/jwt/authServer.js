@@ -12,6 +12,12 @@ console.log('passing through authServer');
 const authServer = express();
 authServer.use(express.json());
 const port = process.env.AUTHORIZATION_SERVER_PORT || 4000;
+function envCheck() {
+  const authPort = process.env.AUTHORIZATION_SERVER_PORT;
+  if (authPort == null) console.log('.env not found');
+}
+envCheck();
+
 const posts = [
   {
     username: 'Kyle',

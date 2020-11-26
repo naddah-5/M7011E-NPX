@@ -6,7 +6,8 @@
   "scripts": {
     "src": "nodemon ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./src/index.js; node src/api/middleware/jwt/authServer.js ",
+    "start": "node ./src/index.js",
+    "startAuth": "node src/api/middleware/jwt/authServer.js",
     "transpile": "babel ./src --out-dir dist",
     "clean": "rimraf dist",
     "build": "npm-run-all clean transpile",
