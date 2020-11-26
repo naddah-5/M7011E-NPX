@@ -3,13 +3,13 @@ let express = require('express');
 var router = express.Router();
 const houses = require("./routes/houses");
 const jwtTokens = require("./routes/jwtTokens");
-const auth = require('./middleware/jwt/authServer');
+//const auth = require('./middleware/jwt/authServer');
 
 router.use(express.json());
 
 router.use('/houses', houses);
 router.use('/jwtTokens', jwtTokens);
-router.use('/authServer', auth);
+//router.use('/authServer', auth);
 
 
 // Sanity test, use this to verify that everything works up until this point.

@@ -5,12 +5,13 @@ require('dotenv').config()
 let express = require("express");
 let jwt = require('jsonwebtoken');
 
-var router = express.Router();
-
-router.use(express.json());
 
 console.log('passing through authServer');
 
+
+const authServer = express();
+authServer.use(express.json());
+const port = process.env.AUTHORIZATION_SERVER_PORT || 4000;
 const posts = [
   {
     username: 'Kyle',
@@ -22,16 +23,16 @@ const posts = [
   }
 ]
 // Sanity test, use this to verify that everything works up until this point.
-router.get('/sanity', (req, res) => {
+authServer.get('/sanity', (req, res) => {
   res.send('This is a sanity test.')
 })
 
-router.get('/posts', authenticateToken, (req, res) =>{
+authServer.get('/posts', authenticateToken, (req, res) =>{
   res.json(posts.filter(post => post.username === req.user.name));
 })
 
 
-router.post("/login", (req, res) => {
+authServer.post("/login", (req, res) => {
   
   //
   // Authenticate user here!
@@ -56,5 +57,4 @@ function authenticateToken(req, res, next) {
   });
 }
 
-
-module.exports = router;
+authServer.listen(port, () => console.log('Authorization server is listening to port ' + port));
