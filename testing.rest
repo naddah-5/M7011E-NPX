@@ -2,11 +2,12 @@ GET http://localhost:3000/sanity
 
 ###
 
-
+GET http://localhost:3000/authServer/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiS3lsZSIsImlhdCI6MTYwNjI5OTY3NH0.9zMGnzOHVfmfkU-ym9RoTJLshE_9vqxqi8yKm0fd61U
 
 ###
 
-POST http://localhost:3000/authServer
+POST http://localhost:3000/authServer/login
 Content-Type: application/json
 
 {
