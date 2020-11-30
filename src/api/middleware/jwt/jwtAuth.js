@@ -9,14 +9,9 @@ let jwt = require('jsonwebtoken');
 console.log('passing through authServer');
 
 
-const authServer = express();
-authServer.use(express.json());
-const port = process.env.AUTHORIZATION_SERVER_PORT || 4000;
-function envCheck() {
-  const authPort = process.env.AUTHORIZATION_SERVER_PORT;
-  if (authPort == null) console.log('.env not found');
-}
-envCheck();
+const router = express();
+router.use(express.json());
+
 
 const posts = [
   {
@@ -29,16 +24,16 @@ const posts = [
   }
 ]
 // Sanity test, use this to verify that everything works up until this point.
-authServer.get('/sanity', (req, res) => {
+router.get('/sanity', (req, res) => {
   res.send('This is a sanity test.')
 })
 
-authServer.get('/posts', authenticateToken, (req, res) =>{
+router.get('/posts', authenticateToken, (req, res) =>{
   res.json(posts.filter(post => post.username === req.user.name));
 })
 
 
-authServer.post("/login", (req, res) => {
+router.post("/login", (req, res) => {
   
   //
   // Authenticate user here!
@@ -63,4 +58,4 @@ function authenticateToken(req, res, next) {
   });
 }
 
-authServer.listen(port, () => console.log('Authorization server is listening to port ' + port));
+module.exports = router;

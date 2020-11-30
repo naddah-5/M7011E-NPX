@@ -2,12 +2,12 @@ GET http://localhost:3000/sanity
 
 ###
 
-GET http://localhost:4000/posts
+GET http://localhost:3000/jwtAuth/posts
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiS3lsZSIsImlhdCI6MTYwNjI5OTY3NH0.9zMGnzOHVfmfkU-ym9RoTJLshE_9vqxqi8yKm0fd61U
 
 ###
 
-POST http://localhost:4000/login
+POST http://localhost:3000/jwtAuth/login
 Content-Type: application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:4000/sanity
+GET http://localhost:3000/sanity
 
 ###
 
