@@ -1,4 +1,5 @@
 const House = require("../models/house");
+const LocCtrl = require("./location");
 
 // LOAD from ID
 exports.load = function (req, res, next, id) {
@@ -13,6 +14,8 @@ exports.load = function (req, res, next, id) {
       (err) => next(err)
     );
 };
+
+
 // GET by owner
 exports.getByOwner = function (req, res, next) {
   House.find({ owner: req.params.owner} , (err, result) => {
@@ -36,9 +39,15 @@ exports.list = function (req, res, next) {
 
 // POST Create
 exports.create = function (req, res, next) {
-  House.create(req.body, (err, result) => {
-    if (err) return next(err);
-    return res.json(result);
+  LocCtrl.isVacant(req.body.location).then( (isVacant) => {
+  if (isVacant) {
+    House.create(req.body, (err, result) => {
+      if (err) return next(err);
+      return res.json(result);
+    });
+  }else { return next(); }
+  }, (err) => { 
+    next(err) 
   });
 };
 

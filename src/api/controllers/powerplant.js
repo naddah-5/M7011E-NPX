@@ -1,4 +1,3 @@
-const powerplant = require("../models/powerplant");
 const Powerplant = require("../models/powerplant");
 
 // LOAD from ID
@@ -15,7 +14,7 @@ exports.load = function (req, res, next, id) {
 };
 // GET ByOwner
 exports.getByOwner = function (req, res, next) {
-  powerplant.find({ owner: req.params.owner} , (err, result) => {
+  Powerplant.find({ owner: req.params.owner} , (err, result) => {
     if (err) return next(err);
     return res.json(result);
   });

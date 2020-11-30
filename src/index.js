@@ -8,7 +8,7 @@ require("dotenv").config();
 
 // init config
 const port = process.env.SERVER_PORT || 3030;
-const uri = process.env.MONGO_URI;
+const uri = process.env.MONGO_URI || "mongodb://localhost:27017/simulator";
 const app = express();
 
 router.use(express.json());
