@@ -33,11 +33,7 @@ router.get('/posts', authenticateToken, (req, res) =>{
 })
 
 
-router.post("/login", (req, res) => {
-  
-  //
-  // Authenticate user here!
-  //
+router.get("/token", (req, res) => {
 
   const username = req.body.username;
   const user = { name: username };

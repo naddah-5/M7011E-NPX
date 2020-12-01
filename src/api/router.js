@@ -4,12 +4,14 @@ var router = express.Router();
 const houses = require("./routes/houses");
 const jwtTokens = require("./routes/jwtTokens");
 const auth = require('./middleware/jwt/jwtAuth');
+const login = require('./routes/login')
 
 router.use(express.json());
 
 router.use('/houses', houses);
 router.use('/jwtTokens', jwtTokens);
 router.use('/jwtAuth', auth);
+router.use('/login', login);
 
 
 // Sanity test, use this to verify that everything works up until this point.
