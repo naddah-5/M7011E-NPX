@@ -1,1 +1,0 @@
-// findOne(username) -> return dB entry relating to username or false

@@ -35,12 +35,6 @@ router.get('/', async function(req, res) {
             manager: match.manager,
         }, process.env.JWT_ACCESS_TOKEN,{expiresIn: "60m"});
         // we need to update the cookie with the access token
-        if(match.manager){
-            res.redirect(); //enter manager route here
-        }
-        else{
-            res.redirect(); //enter prosumer route here
-        }
     }
     else{
         console.log(credentialFail);
