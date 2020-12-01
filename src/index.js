@@ -3,6 +3,7 @@
 
 const express = require("express");
 const router = require("./api/router");
+const cookieParser = require('cookie-parser');
 var mongoose = require("mongoose");
 require("dotenv").config();
 
@@ -11,7 +12,6 @@ const port = process.env.SERVER_PORT || 3030;
 const uri = process.env.MONGO_URI || "mongodb://localhost:27017/simulator";
 const app = express();
 
-router.use(express.json());
 
 mongoose.connect(uri, { 
   "auth": { "authSource": "admin" },
@@ -23,6 +23,7 @@ mongoose.connect(uri, {
   .catch( (err) => console.error(err));
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use("/", router);
 

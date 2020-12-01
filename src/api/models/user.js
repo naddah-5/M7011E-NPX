@@ -1,18 +1,17 @@
 const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema({
-    name: {
+    username: {
         type: String,
         required: true,
         unique: true
     },
     email: {
         type: String,
-        required: true,
         unique: true
     },
     // make passwords encrypted
-    password: {
+    Hpassword: {
         type: String,
         required: true
     },
@@ -24,4 +23,4 @@ const userSchema = new Schema({
     // could add a special case for admins here, not sure that it would be the best solution
 });
 
-module.exports = model("Users", userSchema);
+module.exports = model("User", userSchema);
