@@ -24,9 +24,11 @@ exports.authenticateToken = async function(req, res, next) {
     console.log('token not found');
     return res.sendStatus(401);
   }
-  jwt.verify(token, process.env.JWT_ACCESS_TOKEN_KEY, (err, user) => {
+  jwt.verify(token, process.env.JWT_ACCESS_TOKEN_KEY, (err, username) => {
     if (err) return res.sendStatus(403);
-    req.user = user;
+    //this line should check if the claimed username matches the username in the JWT token
+    //if something breaks I would start by checking this one.
+    if (req.body.username != username) return res.sendStatus(403);
     next();
   });
 }
