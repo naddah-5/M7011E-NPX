@@ -28,7 +28,7 @@ exports.authenticateToken = async function(req, res, next) {
     if (err) return res.sendStatus(403);
     //this line should check if the claimed username matches the username in the JWT token
     //if something breaks I would start by checking this one.
-    if (req.body.username != username) return res.sendStatus(403);
+    else if (req.body.username != username) return res.sendStatus(403);
     next();
   });
 }
