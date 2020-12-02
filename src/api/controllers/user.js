@@ -37,9 +37,9 @@ exports.login = async function(req, res) {
             username: match.username,
             manager: match.manager,
         }, process.env.JWT_ACCESS_TOKEN,{expiresIn: "60m"});
-        // maxAge is a expiration timer defined in _milliseconds_, http cookie as we only need to store the token
-        // the cookie bellow will be named 'tokenCookie' and will contain the token variable i.e. the JWT.
-        res.cookie('tokenCookie', token, { maxAge: 3600000, httpOnly: true });
+        // maxAge is a expiration timer defined in _milliseconds_, currently set to 1 hour, http cookie as we only need to store the token
+        // the cookie bellow will be named 'token' and will contain the token variable i.e. the JWT.
+        res.cookie('token', token, { maxAge: 3600000, httpOnly: true });
     }
     else{
         console.log(credentialFail);
