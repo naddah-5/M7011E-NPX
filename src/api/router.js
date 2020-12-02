@@ -4,7 +4,7 @@ var router = express.Router();
 const houses = require("./routes/houses");
 const jwtTokens = require("./routes/jwtTokens");
 const auth = require('./middleware/jwt/jwtAuth');
-const login = require('./routes/login')
+const login = require('./routes/user')
 
 router.use(express.json());
 

@@ -1,5 +1,6 @@
 const User = require('../models/user');
 let jwt = require('jsonwebtoken');
+let SALT_WORK_FACTOR = 10;
 
 require('dotenv').config()
 
@@ -30,13 +31,15 @@ exports.login = async function(req, res) {
         res.sendStatus(401);
     }
     let match = await user.findOne({username: username});
-    let passwordMatch = await bcrypt.compare(password, match.password);
+    let passwordMatch = await bcrypt.compare(password, match.Hpassword);
     if(match && passwordMatch){
         let token = jwt.sign({
             username: match.username,
             manager: match.manager,
         }, process.env.JWT_ACCESS_TOKEN,{expiresIn: "60m"});
-        // we need to update the cookie with the access token
+        // maxAge is a expiration timer defined in _milliseconds_, http cookie as we only need to store the token
+        // the cookie bellow will be named 'tokenCookie' and will contain the token variable i.e. the JWT.
+        res.cookie('tokenCookie', token, { maxAge: 3600000, httpOnly: true });
     }
     else{
         console.log(credentialFail);
