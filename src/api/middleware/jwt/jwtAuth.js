@@ -6,52 +6,32 @@ let express = require("express");
 let jwt = require('jsonwebtoken');
 
 
-console.log('passing through authServer');
+console.log('passing through authentication');
 
 
 const router = express();
 router.use(express.json());
 
 
-const posts = [
-  {
-    username: 'Kyle',
-    title: 'Post 1'
-  },
-  {
-    username: 'Jim',
-    title: 'Post 2'
-  }
-]
 // Sanity test, use this to verify that everything works up until this point.
 router.get('/sanity', (req, res) => {
   res.send('This is a sanity test.')
 })
 
-router.get('/posts', authenticateToken, (req, res) =>{
-  res.json(posts.filter(post => post.username === req.user.name));
-})
-
-
-router.get("/token", (req, res) => {
-
-  const username = req.body.username;
-  const user = { name: username };
-
-  const accessToken = jwt.sign(user, process.env.JWT_ACCESS_TOKEN_KEY);
-  res.json({ accessToken: accessToken  })
-})
-
-function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-  if (token == null) return res.sendStatus(401);
-
-  jwt.verify(token, process.env.JWT_ACCESS_TOKEN_KEY, (err, user) => {
+exports.authenticateToken = async function(req, res, next) {
+  let token = req.cookies.token;
+  if (token == null) {
+    console.log('token not found');
+    return res.sendStatus(401);
+  }
+  jwt.verify(token, process.env.JWT_ACCESS_TOKEN_KEY, (err, username) => {
     if (err) return res.sendStatus(403);
-    req.user = user;
+    //this line should check if the claimed username matches the username in the JWT token
+    //if something breaks I would start by checking this one.
+    else if (req.body.username != username) return res.sendStatus(403);
     next();
   });
 }
+
 
 module.exports = router;

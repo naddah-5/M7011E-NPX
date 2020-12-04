@@ -1,6 +1,10 @@
 const User = require('../models/user');
 let jwt = require('jsonwebtoken');
+<<<<<<< HEAD
 let bcrypt = require('bcrypt');
+=======
+let SALT_WORK_FACTOR = 10;
+>>>>>>> eac731f280246461bc6b4d8eb4ca3a5102e32195
 
 require('dotenv').config();
 const SALT_WORK_FACTOR = 10;
@@ -30,33 +34,6 @@ exports.create = async function (req, res, next) {
     });
   });
 }
-/*
-exports.login = async function (req, res) {
-
-      console.log("In login function");
-      const username = req.body.username;
-      const password = req.body.password;
-
-      if (username == null || password == null) {
-        console.log(credentialFail);
-        res.sendStatus(401);
-      }
-      let match = await User.findOne({username: username});
-      let passwordMatch = await bcrypt.compare(password, match.password);
-      if (match && passwordMatch) {
-        let token = jwt.sign({
-          username: match.username,
-          manager: match.manager,
-        }, process.env.JWT_ACCESS_TOKEN, {expiresIn: "60m"});
-        // we need to update the cookie with the access token
-      }
-      else {
-        console.log(credentialFail);
-        res.sendStatus(401); //Unauthorized i.e. incorrect 
-      }
-    }
-*/
-
 exports.login = async function (req, res, next) {
   if (req.body.username === null || req.body.password === null) {
     res.sendStatus(401);
