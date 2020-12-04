@@ -1,7 +1,7 @@
 const User = require('../models/user');
 let jwt = require('jsonwebtoken');
 let bcrypt = require('bcrypt');
-let SALT_WORK_FACTOR = 10;
+
 
 require('dotenv').config();
 const SALT_WORK_FACTOR = 10;
@@ -47,7 +47,7 @@ exports.login = async function (req, res, next) {
           'username': req.body.username,
           'manager': req.body.manager
         },
-          process.env.JWT_ACCESS_TOKEN, {algorithm: 'RS256'}, (err, token) => {
+          process.env.JWT_ACCESS_TOKEN_KEY, {algorithm: 'RS256'}, (err, token) => {
             if (err) return next(err);
             res.sendStatus(200);
             return res.json(token);
