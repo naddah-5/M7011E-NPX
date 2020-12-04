@@ -7,11 +7,10 @@ const userSchema = new Schema({
         unique: true
     },
     email: {
-        type: String,
-        unique: true
+        type: String
     },
     // make passwords encrypted
-    Hpassword: {
+    password: {
         type: String,
         required: true
     },
