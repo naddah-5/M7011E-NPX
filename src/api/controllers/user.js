@@ -1,10 +1,7 @@
 const User = require('../models/user');
 let jwt = require('jsonwebtoken');
-<<<<<<< HEAD
 let bcrypt = require('bcrypt');
-=======
 let SALT_WORK_FACTOR = 10;
->>>>>>> eac731f280246461bc6b4d8eb4ca3a5102e32195
 
 require('dotenv').config();
 const SALT_WORK_FACTOR = 10;
