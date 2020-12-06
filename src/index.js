@@ -15,8 +15,8 @@ const app = express();
 
 mongoose.connect(uri, { 
   "auth": { "authSource": "admin" },
-  "user": process.env.MONGO_ADMIN,
-  "pass": process.env.MONGO_ADMIN_SECRET,
+  "user": process.env.MONGO_USER,
+  "pass": process.env.MONGO_USER_SECRET,
   useUnifiedTopology: true,
   useNewUrlParser: true })
   .then( () => console.log('connection success'))
