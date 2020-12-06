@@ -8,6 +8,7 @@ var router = express.Router();
 router
   .route('/')
     .get(userCtrl.login)
-    .post(userCtrl.create); 
+    .delete(userCtrl.delete)
+    .post(userCtrl.create);
 
 module.exports = router;

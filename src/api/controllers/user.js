@@ -31,8 +31,26 @@ exports.create = async function (req, res, next) {
     });
   });
 }
+
+exports.delete = async function (req, res, next) {
+  console.log("in delete user function");
+
+  await User.findOneAndRemove({"username": req.body.username}, (err, doc) => {
+    if(!doc) {
+      res.sendStatus(400);
+      return next("No user found");
+    }
+    else {
+      res.sendStatus(200);
+      return next("User removed");
+    }
+  })
+}
+
+
 exports.login = async function (req, res, next) {
   if (req.body.username == null || req.body.password == null) {
+    console.log(credentialFail);
     res.sendStatus(401);
     return next();
 }
@@ -47,5 +65,9 @@ exports.login = async function (req, res, next) {
     // the cookie bellow will be named 'token' and will contain the token variable i.e. the JWT.
     res.cookie('token', token, { maxAge: 3600000, httpOnly: true });
     console.log(token);
-  };
+  }
+  else{
+    console.log(credentialFail);
+    res.sendStatus(401);
+  }
 };
