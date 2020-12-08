@@ -64,11 +64,12 @@ exports.login = async function (req, res, next) {
     // maxAge is a expiration timer defined in _milliseconds_, currently set to 1 hour, http cookie as we only need to store the token
     // the cookie bellow will be named 'token' and will contain the token variable i.e. the JWT.
     res.cookie('token', token, { maxAge: 3600000, httpOnly: true });
-    console.log(token);
-    next();
+    res.sendStatus(200);
+    return next();
   }
   else{
     console.log(credentialFail);
     res.sendStatus(401);
+    return next();
   }
 };
