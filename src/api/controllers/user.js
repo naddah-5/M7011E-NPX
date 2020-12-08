@@ -55,7 +55,7 @@ exports.login = async function (req, res, next) {
     return next();
 }
   let match = await User.findOne({'username': req.body.username});
-  let passwordMatch = await bcrypt.compare(req.body.password, user.password);
+  let passwordMatch = await bcrypt.compare(req.body.password, match.password);
   if(match && passwordMatch){
     let token = jwt.sign({
         username: match.username,
@@ -64,10 +64,12 @@ exports.login = async function (req, res, next) {
     // maxAge is a expiration timer defined in _milliseconds_, currently set to 1 hour, http cookie as we only need to store the token
     // the cookie bellow will be named 'token' and will contain the token variable i.e. the JWT.
     res.cookie('token', token, { maxAge: 3600000, httpOnly: true });
-    console.log(token);
+    res.sendStatus(200);
+    return next();
   }
   else{
     console.log(credentialFail);
     res.sendStatus(401);
+    return next();
   }
 };
