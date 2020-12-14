@@ -60,7 +60,7 @@ exports.login = async function (req, res, next) {
     let token = jwt.sign({
         username: match.username,
         manager: match.manager,
-    }, process.env.JWT_ACCESS_TOKEN,{expiresIn: "60m"});
+    }, process.env.JWT_ACCESS_TOKEN_KEY,{expiresIn: "60m"});
     // maxAge is a expiration timer defined in _milliseconds_, currently set to 1 hour, http cookie as we only need to store the token
     // the cookie bellow will be named 'token' and will contain the token variable i.e. the JWT.
     res.cookie('token', token, { maxAge: 3600000, httpOnly: true });

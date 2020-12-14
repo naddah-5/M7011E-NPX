@@ -20,7 +20,7 @@ const windturbineSchema = new Schema({
     },
     maxProduction:{
         type: Number,
-        default: 500
+        default: 2
     },
     production:{
         type: Number,
