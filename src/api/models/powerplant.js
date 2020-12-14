@@ -12,6 +12,10 @@ const powerplantSchema = new Schema({
         type: Battery,
         required: true
     },
+    location: {
+      type: [Number],
+      validate: (v) => Array.isArray(v) && v.length == 2,
+    },
     minProduction: {
         type: Number,
         default: 0

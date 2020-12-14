@@ -1,0 +1,249 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "M7017E App",
+    "description": "api dev server",
+    "version": "0.0.1",
+    "contact": {
+      "name": "Team NPX",
+      "url": "https://github.com/naddah-5/M7011E-NPX"
+    }
+  },
+  "servers": [
+    {
+      "url": "{protocol}://localhost:{port}/{basePath}",
+      "description": "Dev server",
+      "variables": {
+        "port": {
+          "default": "3000"
+        },
+        "protocol": {
+          "enum": ["http", "https"],
+          "default": "http"
+        },
+        "basePath": {
+          "default": ""
+        }
+      }
+    },
+    {
+      "url": "{protocol}://{host}:{port}/{basePath}",
+      "description": "Prod server",
+      "variables": {
+        "host": {
+          "default": ""
+        },
+        "port": {
+          "default": ""
+        },
+        "protocol": {
+          "enum": ["http", "https"],
+          "default": "http"
+        },
+        "basePath": {
+          "default": ""
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/houses": {
+      "get": {
+        "description": "Returns all houses the user has access to",
+        "responses": {
+          "200": {
+            "description": "List of Houses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#components/schemas/house"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Create a House",
+        "responses": {
+          "200": {
+            "description": "Create Singular House",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#components/schemas/house"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/houses/{id}": {
+      "get": {
+        "description": "return a house the user has access to",
+        "operationId": "getHouseById",
+        "responses": {
+          "200": {
+            "description": "Singular House",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#components/schemas/house"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "update House",
+        "responses": {
+          "200": {
+            "description": "Singular house update",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#components/schemas/house"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "house": {
+        "type": "object",
+        "required": ["_id", "owner", "location"],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "format": "byte"
+          },
+          "owner": {
+            "type": "string"
+          },
+          "location": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minItems": 2,
+              "maxItems": 2
+            }
+          },
+          "battery": {
+            "$ref": "#/components/schemas/battery"
+          },
+          "windturbine": {
+            "$ref": "#/components/schemas/windturbine"
+          },
+          "windspeed": {
+            "type": "number"
+          },
+          "consumption": {
+            "type": "number"
+          },
+          "greed": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      },
+      "powerplant": {
+        "type": "object",
+        "required": ["_id", "owner", "location"],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "format": "byte"
+          },
+          "owner": {
+            "type": "string"
+          },
+          "location": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minItems": 2,
+              "maxItems": 2
+            }
+          },
+          "battery": {
+            "$ref": "#/components/schemas/battery"
+          },
+          "inertia": {
+            "type": "number"
+          },
+          "minProduction": {
+            "type": "number"
+          },
+          "maxProduction": {
+            "type": "number"
+          },
+          "production": {
+            "type": "number"
+          },
+          "consumption": {
+            "type": "number"
+          },
+          "greed": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      },
+      "battery": {
+        "type": "object",
+        "properties": {
+          "capacity": {
+            "type": "number"
+          },
+          "minCapacity": {
+            "type": "number"
+          },
+          "maxCapacity": {
+            "type": "number"
+          },
+          "chargeRate": {
+            "type": "number"
+          }
+        }
+      },
+      "windturbine": {
+        "type": "object",
+        "required": ["status"],
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "minProduction": {
+            "type": "number"
+          },
+          "maxProduction": {
+            "type": "number"
+          },
+          "production": {
+            "type": "number"
+          },
+          "windspeed": {
+            "type": "number"
+          },
+          "maxWindspeed": {
+            "type": "number"
+          },
+          "minWindspeed": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}
