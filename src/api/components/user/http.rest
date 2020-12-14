@@ -4,3 +4,12 @@ GET http://localhost:3000/houses/
 ###
 
 GET http://localhost:3000/houses
+
+###
+
+POST http://localhost:3000/houses
+Content-Type: application/json
+{
+    "owner": "Karl Karlsson",
+    "location": [1, 2]
+}
