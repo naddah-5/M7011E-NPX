@@ -15,7 +15,7 @@ const batterySchema = new Schema({
   },
   chargeRate: {
     type: Number,
-    default: 200,
+    default: 1,
   },
 });
 

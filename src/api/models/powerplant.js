@@ -18,7 +18,7 @@ const powerplantSchema = new Schema({
     },
     maxProduction: {
         type: Number,
-        default: 100000000 // 100 000 MWh
+        default: 100 // 100 000 MWh
     },
     production: {
         type: Number,
