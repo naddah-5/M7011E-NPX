@@ -24,10 +24,20 @@ GET http://localhost:3000/houses/sanity
 
 ###
 
-POST http://localhost:3000/user
+
+GET http://localhost:3000/user
 Content-Type: application/json
 
 {
     "username": "Karl Karlsson",
     "password": "test123"
+}
+
+###
+
+DELETE http://localhost:3000/user
+Content-Type: application/json
+
+{
+    "username": "Karl Karlsson"
 }

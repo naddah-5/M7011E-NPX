@@ -30,7 +30,7 @@ const houseSchema = new Schema({
   },
   consumption: {
     type: Number,
-    default: 100,
+    default: 0.5,
   },
   greed: {
     type: Number,

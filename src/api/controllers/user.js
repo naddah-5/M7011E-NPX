@@ -31,21 +31,45 @@ exports.create = async function (req, res, next) {
     });
   });
 }
+
+exports.delete = async function (req, res, next) {
+  console.log("in delete user function");
+
+  await User.findOneAndRemove({"username": req.body.username}, (err, doc) => {
+    if(!doc) {
+      res.sendStatus(400);
+      return next("No user found");
+    }
+    else {
+      res.sendStatus(200);
+      return next("User removed");
+    }
+  })
+}
+
+
 exports.login = async function (req, res, next) {
   if (req.body.username == null || req.body.password == null) {
+    console.log(credentialFail);
     res.sendStatus(401);
     return next();
 }
   let match = await User.findOne({'username': req.body.username});
-  let passwordMatch = await bcrypt.compare(req.body.password, user.password);
+  let passwordMatch = await bcrypt.compare(req.body.password, match.password);
   if(match && passwordMatch){
     let token = jwt.sign({
         username: match.username,
         manager: match.manager,
-    }, process.env.JWT_ACCESS_TOKEN,{expiresIn: "60m"});
+    }, process.env.JWT_ACCESS_TOKEN_KEY,{expiresIn: "60m"});
     // maxAge is a expiration timer defined in _milliseconds_, currently set to 1 hour, http cookie as we only need to store the token
     // the cookie bellow will be named 'token' and will contain the token variable i.e. the JWT.
     res.cookie('token', token, { maxAge: 3600000, httpOnly: true });
-    console.log(token);
-  };
+    res.sendStatus(200);
+    return next();
+  }
+  else{
+    console.log(credentialFail);
+    res.sendStatus(401);
+    return next();
+  }
 };

@@ -1,27 +1,21 @@
 "use strict";
 
-let Battery = require("./battery");
-let WindTurbine = require("./windturbine");
+const Battery = require("./battery");
+const WindTurbine = require("./windturbine");
+const MarketPrice = require("./marketprice")
 
-class House {
-    constructor(id, owner, capacity, marketPrice, location, temperature, windSpeed, consumption, greed){
-        this.id = id;
+module.exports = class House {
+    constructor(owner, capacity, location, temperature, greed){
 		this.owner = owner;
 		this.Battery = new Battery(id, capacity);
         this.WindTurbine = new WindTurbine(id);
-        this.marketPrice = marketPrice;
+        this.marketPrice = 0;
         this.location = location;
         this.temperature = temperature;
-        this.windSpeed = windSpeed;
-        this.consumption = consumption; // roughly 100 kWh
+        this.windSpeed = 0;
+        this.consumption = 0; // roughly 100 kWh
         this.greed = greed; 
 	}
-		getId(){
-			return this.id;
-		}
-		setId( id ){
-			this.id = id;
-		}
 
 		getOwner(){ return this.owner; } 
 		setOwner(owner){ this.owner = owner; } 

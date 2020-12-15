@@ -12,13 +12,17 @@ const powerplantSchema = new Schema({
         type: Battery,
         required: true
     },
+    location: {
+      type: [Number],
+      validate: (v) => Array.isArray(v) && v.length == 2,
+    },
     minProduction: {
         type: Number,
         default: 0
     },
     maxProduction: {
         type: Number,
-        default: 100000000 // 100 000 MWh
+        default: 100 // 100 000 MWh
     },
     production: {
         type: Number,

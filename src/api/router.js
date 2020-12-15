@@ -7,6 +7,7 @@ const auth = require('./middleware/jwt/jwtAuth');
 const user = require('./routes/user')
 
 router.use(express.json());
+router.use(auth);
 
 router.use('/houses', houses);
 router.use('/jwtTokens', jwtTokens);

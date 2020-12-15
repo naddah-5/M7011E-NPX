@@ -1,6 +1,7 @@
 "use strict";
 // Import the system here
-
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("../openapi.json");
 const express = require("express");
 const router = require("./api/router");
 const cookieParser = require('cookie-parser');
@@ -24,6 +25,7 @@ mongoose.connect(uri, {
 
 app.use(express.json());
 app.use(cookieParser());
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/", router);
 
