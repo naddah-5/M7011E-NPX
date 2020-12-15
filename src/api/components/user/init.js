@@ -4,6 +4,7 @@ const gaussian = require('gaussian');
 const MarketPrice = require('./marketprice');
 const PowerPlant = require('./powerplant')
 const House = require('./house')
+const Region = require('./region')
 
 //controll systems
 const battery = require('./battery');
@@ -22,19 +23,12 @@ const users = require('../../models/user');
 
 //these variables should probably be moved to .env or a config file
 
-//average wind speed in the region (km/h)
-let regionMeanWindspeed = 14;
-let regionStandardDeviationWindspeed = 2;
-let regionMeanTemperature = 0;
-let regionStandardDeviationTemperature = 6;
 
 //time intervall should be 1 sec = 1 hour
 class init {
     constructor(){
-        this.MarketPrice = new MarketPrice("Luleå");
+        this.region = new Region("Luleå", 0, 3, 10, 4);
         this.powerplant = new PowerPlant("Vattenfall", 100, 30, 1)
-        this.windSpeed = gaussian(regionMeanWindspeed, regionStandardDeviationWindspeed);
-        this.temperature = gaussian(regionMeanTemperature, regionStandardDeviationTemperature);
         this.population = house.list.length();
 
         this.house = new House("Anders Andersson", 5, [1, 2], 0, 1);
@@ -48,13 +42,4 @@ class init {
         }
         return totalConsumption;
     }
-
-    getWindSpeed(){
-        console.log("current wind speed is: " + this.windSpeed);
-        return this.windSpeed;
-    }
-
-    
 }
-
-let standardDistribution = gaussian(0, 1);
