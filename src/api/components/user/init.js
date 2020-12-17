@@ -27,7 +27,9 @@ const users = require('../../models/user');
 //time intervall should be 1 sec = 1 hour
 class init {
     constructor(){
+        // params(region name, average temperature, temperature standard deviation, average wind speed, wind speed standard deviation)
         this.region = new Region("Luleå", 0, 3, 10, 4);
+        //params(powerplant owner, max production, innertia, consumption)
         this.powerplant = new PowerPlant("Vattenfall", 100, 30, 1)
         this.population = house.list.length();
 
@@ -41,5 +43,10 @@ class init {
             // TODO: iterate over the house list and sum up the total consumption
         }
         return totalConsumption;
+    }
+
+    timeLoop() {
+        console.log('Simulation running');
+        
     }
 }

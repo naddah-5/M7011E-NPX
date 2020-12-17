@@ -2,11 +2,13 @@
 
 const gaussian = require('gaussian');
 const MarketPrice = require('./marketprice')
+const Grid = require('./grid');
 
 module.exports = class region {
     constructor(name, averageTemperature, temperatureDeiation, averageWindSpeed, windSpeedDeviation) {
         this.name = name;
         this.marketPrice = new MarketPrice(name);
+        this.grid = new Grid(name, 1000);
         this.averageTemperature = averageTemperature;
         this.temperatureDeviation = Math.abs(temperatureDeiation);
         this.averageWindSpeed = Math.abs(averageWindSpeed);

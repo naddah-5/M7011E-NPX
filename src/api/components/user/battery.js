@@ -1,19 +1,12 @@
 "use strict";
 
 module.exports = class battery {
-    constructor(id, owner, capacity){
-        this.id = id;
+    constructor(owner, capacity){
         this.owner = owner;
         this.minCapacity = 0;
         this.capacity = capacity;
         this.charge = 0;
-        this.chargeRate = 200; //roughly 200 kWh
-    }
-    getId(){
-        return this.id;
-    }
-    setId( id ){
-        this.id = id;
+        this.chargeRate = 1; //roughly 200 kWh
     }
     getOwner(){
         return this.owner;
@@ -25,7 +18,15 @@ module.exports = class battery {
         return this.minCapacity;
     }
     setMinCapacity(newMinCapacity){
-        this.minCapacity = newMinCapacity;
+        if(newMinCapacity >= 0 && newMinCapacity < this.capacity) {
+            this.minCapacity = newMinCapacity;
+        }
+        else if(newMinCapacity >= this.capacity && newMinCapacity > 0) {
+            this.minCapacity = this.capacity - 1;
+        }
+        else if(newMinCapacity < 0) {
+            this.minCapacity = 0;
+        }
     }
     getCapacity(){
         return this.capacity;
@@ -37,7 +38,15 @@ module.exports = class battery {
         return this.charge;
     }
     setCharge(newCharge){
-        this.charge = newCharge;
+        if(this.capacity >= newCharge) {
+            this.charge = newCharge;
+        }
+        else if(this.capacity <= newCharge) {
+            this.charge = this.capacity;
+        }
+        else {
+            this.charge = this.minCapacity;
+        }
     }
     getChargeRate(){
         return this.chargeRate;
